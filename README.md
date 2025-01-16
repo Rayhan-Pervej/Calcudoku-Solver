@@ -48,6 +48,9 @@ Calcudoku, also known as KenKen, is a logic-based numerical puzzle that combines
    - Paste the code into a new Colab notebook.
    - Execute the code cell. The output (solution grid) will appear in the notebook.
 
+### Website for more puzzle:
+It can solve https://www.calcudoku.org/  puzzle. Till I tried I solved, now know about now.
+
 ### Sample Input and Output:
 **Input File:**
 - Create a text file named input1.txt on your computer.
