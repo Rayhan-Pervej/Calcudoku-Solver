@@ -97,14 +97,15 @@ Calcudoku, also known as KenKen, is a logic-based numerical puzzle that combines
 
 ### Forward Checking Integration
 
-The current implementation of the Calcudoku Solver relies on backtracking to explore potential solutions. However, forward checking can be integrated as a future improvement to enhance the solver's efficiency. By eliminating invalid numbers for future cells during the solving process, forward checking can reduce unnecessary computations and make the algorithm faster, particularly for larger or more complex puzzles.
+The current implementation of the Calcudoku Solver utilizes backtracking to explore potential solutions. A basic form of forward checking is present in the code, where invalid numbers for the current cell are pruned before attempting assignments. This is achieved through the checkValid function, which ensures that assigned numbers comply with the rules of rows, columns, and block constraints.
 
+However, the forward checking in this implementation is limited in scope. It does not actively propagate constraints to future cells. In other words, while the solver eliminates invalid numbers for the current cell, it does not dynamically update the potential domains of unassigned cells based on the current assignment.
 
 ---
 
 ## Contributing
 
-Feel free to fork this repository, make improvements, and submit a pull request! Whether you want to optimize the algorithm, add new features, or enhance documentation, your contributions are welcome.
+Feel free to fork this repository, make improvements, and submit a pull request! Whether you want to optimize the algorithm, add new features your contributions are welcome.
 
 ---
 
