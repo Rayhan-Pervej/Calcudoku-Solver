@@ -23,4 +23,94 @@ Calcudoku, also known as KenKen, is a logic-based numerical puzzle that combines
 ## Example Problem and Solution:
 
 ![Calcudoku Example](img.png)
-*Figure: Example Calcudoku problem (size: 650 x 360).*
+
+
+## How to Run the Code
+
+### Prerequisites:
+- Ensure you have access to [Google Colab](https://colab.research.google.com/).
+
+### Steps to Run:
+1. **Open Google Colab**:
+   - Visit [Google Colab](https://colab.research.google.com/).
+
+2. **Upload the Input File**:
+   - In the Colab interface, click on the **Files** tab on the left-hand side.
+   - Use the **Upload** button to upload your input file (e.g., `input1.txt`).
+
+3. **Set the Input File Name**:
+   - Update the `inputFile` variable in the `main()` function within the code:
+     ```python
+     inputFile = "input1.txt"
+     ```
+
+4. **Run the Code**:
+   - Paste the code into a new Colab notebook.
+   - Execute the code cell. The output (solution grid) will appear in the notebook.
+
+### Sample Input and Output:
+**Input File:**
+- Create a text file named input1.txt on your computer.
+- Copy and paste the below content into the file.
+- Upload input1.txt to the Files section in Google Colab as described in the "How to Run the Code" section of your README.
+```
+4 4  // size of the grid
+9    // number of blocks
+
+7+   // clue for block 1
+1 1 2 1 3 1  // cell positions of the block
+
+4    // clue for block 2
+1 2  // cell position for the block
+
+1-   // clue for block 3
+1 3 1 4  // cell positions for the block
+
+2-   // clue for block 4
+2 2 2 3
+
+2    // clue for block 5
+2 4
+
+3    // clue for block 6
+4 1
+
+1-   // clue for block 7
+3 2 4 2
+
+1-   // clue for block 8
+3 3 4 3
+
+3-   // clue for block 9
+3 4 4 4
+```
+
+**Output:**
+```
+1 4 2 3
+4 3 1 2
+2 1 3 4
+3 2 4 1
+```
+
+## Issue
+
+### Forward Checking in Calcudoku
+
+This program employs **forward checking** as part of its backtracking algorithm to enhance efficiency. Forward checking ensures that every move made in the puzzle does not violate constraints and reduces the search space by pruning invalid numbers for future cells. This is particularly useful in Calcudoku where mathematical operations and positional constraints can quickly make some paths unfeasible.
+
+By applying forward checking:
+- The program checks the validity of a number before placing it in a cell.
+- Invalid numbers (those that break row, column, or cage constraints) are ruled out early.
+- This helps avoid exploring dead-end paths, making the solver faster and more effective.
+
+
+---
+
+## Contributing
+
+Feel free to fork this repository, make improvements, and submit a pull request! Whether you want to optimize the algorithm, add new features, or enhance documentation, your contributions are welcome.
+
+---
+
+Thank you for exploring the Calcudoku Solver. Happy coding and puzzle-solving!
