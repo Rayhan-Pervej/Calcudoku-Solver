@@ -1,0 +1,172 @@
+### input instruction ###
+
+# Run this program in google colab
+# First upload the input files in cloab "Files". Then write the inputed file name in the "main()" function vairable inputFile= "here..".
+# example inputFile = "input1.txt"
+# Output will appear in code cell output. 
+# It can solve https://www.calcudoku.org/ this website puzzle maybe.
+
+
+from itertools import permutations
+from math import prod
+
+
+class calcudokuSolver:
+  def __init__(self, size, blocks):
+    self.size = size
+    self.blocks = blocks
+    self.grid = [[0] * size for _ in range(size)]
+
+  #checking validation
+  def checkValid(self, row, col, num):
+
+    # row column constraints
+    for i in range (self.size):
+      if self.grid[row][i]== num or self.grid[i][col] == num:
+        return False
+    #block constraints
+    for block in self.blocks:
+      if (row, col) in block['cells']:
+        if not self.checkBlock(block, num):
+          return False
+
+    return True
+
+  def checkBlock(self, block, num):
+    cells = block['cells']
+    clue = block['clue']
+
+    if clue.isdigit():
+      if len(cells) == 1 and num == int(clue):
+        return True
+      return False
+
+
+    # Operation based clues
+    target, operation = int(clue[:-1]), clue[-1]
+    currentNums = [self.grid[r][c] for r, c in cells if self.grid[r][c] != 0]
+    currentNums.append(num)
+
+    if len(currentNums) > len(cells):
+      return False
+
+    if operation == '+':
+      if len(currentNums) == len(cells):
+        return sum(currentNums) == target
+      return sum(currentNums) <= target
+
+    # elif operation == '-':
+    #   if len(currentNums) < len(cells):
+    #       return True  # only when block is full
+    #   return abs(currentNums[0] - currentNums[1]) == target
+    #   return False
+
+##### : 0-
+
+    elif operation == '-':
+      if len(currentNums) < len(cells):
+          return True  # More numbers to be placed in the block
+      # all permutations of current numbers
+      for perm in permutations(currentNums):
+          largest = perm[0]
+          restSum = sum(perm[1:])
+          if largest - restSum == target:
+              return True
+      return False
+
+    elif operation == '*':
+      if len(currentNums) == len(cells):
+        return prod(currentNums) == target
+      return prod(currentNums) <= target
+
+    elif operation == '/':
+      if len(currentNums) < len(cells):
+          return True  # more numbers to be placed in the block
+      if len(cells) == 2:
+          # two cells are filled, check the division condition
+          n1, n2 = currentNums[0], currentNums[1]
+          return (n1 / n2 == target or n2 / n1 == target) if n1 != 0 and n2 != 0 else False
+      return False
+
+    return False
+
+  #solving the blocks
+  def solve(self):
+    return self.backTrace(0,0)
+
+  #backtrack algo with forwardcheck
+  def backTrace(self, row, col):
+    if row == self.size:
+        return True
+
+    nextRow, nextCol = (row, col+1) if col + 1 < self.size else (row+1, 0)
+
+    if self.grid[row][col] != 0:
+        return self.backTrace(nextRow, nextCol)
+
+    # possible numbers for the current cell
+    possibleNumbers = [num for num in range(1, self.size + 1) if self.checkValid(row, col, num)]
+
+    for num in possibleNumbers:
+        self.grid[row][col] = num
+        if self.backTrace(nextRow, nextCol):
+            return True
+        self.grid[row][col] = 0
+
+    return False
+
+  # showing result
+  def resultGrid(self):
+    for row in self.grid:
+      print(" ".join(map(str, row)))
+
+# end of calcudokuSolver class
+
+# input part
+def input(inputFile):
+  with open(inputFile, 'r') as file:
+      lines = file.readlines()
+
+  
+  grid_dimensions = lines[0].strip().split()
+  size = int(grid_dimensions[0])
+
+  
+  totalBlocks = int(lines[1].strip())
+
+  clueBlocks = []
+  index = 2  # Starting line for clues and cells
+
+  while index < len(lines):
+      # clue
+      clue = lines[index].strip()
+      index += 1
+
+      # cell positions
+      cellLine = lines[index].strip().split()
+      cells = [(int(cellLine[i]) - 1, int(cellLine[i + 1]) - 1) for i in range(0, len(cellLine), 2)]
+      index += 1
+
+      # Append
+      clueBlocks.append({'clue': clue, 'cells': cells})
+
+  return size, clueBlocks
+
+
+
+# main
+def main():
+
+  inputFile = "input1.txt" #First upload the input files in cloab "Files". Then write the input name in the "main()" function vairable inputFIle using " ".
+  
+  puzzleSize, clueBlocks = input(inputFile) #definning the puzzle
+  result = calcudokuSolver(puzzleSize, clueBlocks) #CSP
+
+  #Result Part
+  if result.solve():
+    result.resultGrid()
+
+  else:
+    print("No Solution Exists")
+
+main()
