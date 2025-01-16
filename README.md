@@ -19,3 +19,8 @@ Calcudoku, also known as KenKen, is a logic-based numerical puzzle that combines
 - **Subtraction (-)**: For a two-cell cage, the difference between the larger and smaller number must equal the target.
 - **Multiplication (×)**: The numbers in the cage must be multiplied by the target number.
 - **Division (÷)**: For a two-cell cage, the quotient of the larger number divided by the smaller must equal the target.
+
+## Example Problem and Solution:
+
+![Calcudoku Example](img.png)
+*Figure: Example Calcudoku problem (size: 650 x 360).*
