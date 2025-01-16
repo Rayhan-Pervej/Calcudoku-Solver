@@ -57,35 +57,27 @@ It can solve https://www.calcudoku.org/  puzzle. Till I tried I solved, now know
 - Copy and paste the below content into the file.
 - Upload input1.txt to the Files section in Google Colab as described in the "How to Run the Code" section of your README.
 ```
-4   // size of the grid
-9    // number of blocks
-
-7+   // clue for block 1
-1 1 2 1 3 1  // cell positions of the block
-
-4    // clue for block 2
-1 2  // cell position for the block
-
-1-   // clue for block 3
-1 3 1 4  // cell positions for the block
-
-2-   // clue for block 4
+4  		//size of the grid
+9 		//no. of blocks. 
+7+ 		//clue for block 1
+1 1 2 1 3 1 	//cell positions of in the blocks
+4 		//clue for block 2
+1 2 		//cell position for the block
+1-		//clue for block 3
+1 3 1 4 	//cell position for the block
+2-		//the rest will have the same format
 2 2 2 3
-
-2    // clue for block 5
+2
 2 4
-
-3    // clue for block 6
+3
 4 1
-
-1-   // clue for block 7
+1-
 3 2 4 2
-
-1-   // clue for block 8
+1-
 3 3 4 3
-
-3-   // clue for block 9
+3-
 3 4 4 4
+
 ```
 
 **Output:**
