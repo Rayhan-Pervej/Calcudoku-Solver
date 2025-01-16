@@ -57,7 +57,7 @@ It can solve https://www.calcudoku.org/  puzzle. Till I tried I solved, now know
 - Copy and paste the below content into the file.
 - Upload input1.txt to the Files section in Google Colab as described in the "How to Run the Code" section of your README.
 ```
-4 4  // size of the grid
+4   // size of the grid
 9    // number of blocks
 
 7+   // clue for block 1
